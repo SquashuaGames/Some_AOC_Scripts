@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6591f5a3980ed23479859b2e722211e9, type: 3}
+  m_Name: RegularMelee
+  m_EditorClassIdentifier: 
+  firstText: ' attacked '
+  secondText: ' for '
+  altText: 
+  setDamage: 0
+  power: 1
+  hitAdjustment: 0
+  combatFX: {fileID: 6616874399525275630, guid: 62ab16b02aa71d245b0aeef84a77cdc5, type: 3}
+  specialFX: 1
+  bonusFX:
+  - {fileID: 6616874399525275630, guid: ed1561beb8c64f84bb8f2f871bddea57, type: 3}
+  - {fileID: 6616874399525275630, guid: 7443ec0b8e6dce048a15fd8e8e2b93ef, type: 3}
+  needsAccuracy: 1
