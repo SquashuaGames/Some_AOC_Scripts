@@ -13,4 +13,7 @@ public class Move : ScriptableObject
     public bool specialFX;
     public GameObject[] bonusFX;
     public bool needsAccuracy = true;
+
+    public AnimationClip moveClip;
+    public int[] spriteIndices;
 }

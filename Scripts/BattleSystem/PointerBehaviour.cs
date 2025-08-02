@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PointerBehaviour : MonoBehaviour
+public class PointerBehavior : MonoBehaviour
 {
     public CombatManager combatManager;
     public DamageCalculatorTest damageCalculator;
@@ -21,17 +21,17 @@ public class PointerBehaviour : MonoBehaviour
             
             if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Mouse1)) 
             {
-                combatManager.pointers[pointerLocation].SetActive(false);
-                pointerLocation++;
-                if (pointerLocation >= combatManager.pointers.ToArray().Length) pointerLocation = 0;
+                combatManager.pointers[pointerLocation].SetActive(false);                
+                pointerLocation = RedirectPointer(pointerLocation, 1);
+                if (pointerLocation >= combatManager.pointers.Count) pointerLocation = 0;
                 combatManager.pointers[pointerLocation].SetActive(true);
                 return;
             }
             if (Input.GetKeyDown(KeyCode.DownArrow)) 
             {
                 combatManager.pointers[pointerLocation].SetActive(false);
-                pointerLocation--;
-                if (pointerLocation < 0) pointerLocation = combatManager.pointers.ToArray().Length -1;
+                pointerLocation = RedirectPointer(pointerLocation, -1);
+                if (pointerLocation < 0) pointerLocation = combatManager.pointers.Count -1;
                 combatManager.pointers[pointerLocation].SetActive(true);
                 return;
             }
@@ -60,15 +60,32 @@ public class PointerBehaviour : MonoBehaviour
         QTBCallBack = callBack;
         targeting = true;
         pointerLocation = i;
-        try
+
+        if (!combatManager.alive[i]) pointerLocation = RedirectPointer(i, 1);
+
+        if (combatManager.pointers[pointerLocation] != null) combatManager.pointers[pointerLocation].SetActive(true);       
+    }
+
+    public int RedirectPointer(int i, int up) 
+    {
+        //If a character is dead, this should skip over them in the targeting.
+        i += up;
+
+        if (i < 0) i = combatManager.allCharacters.Count - 1;
+
+        else if (i >= combatManager.allCharacters.Count) i = 0;
+
+
+        while (!combatManager.alive[i])
         {
-            combatManager.pointers[pointerLocation].SetActive(true);
-        }
-        catch 
-        { 
+            i += up;
+
+            if (i < 0) i = combatManager.allCharacters.Count -1;
+
+            else if (i >= combatManager.allCharacters.Count) i = 0;
 
         }
         
-        
+        return i;
     }
 }
